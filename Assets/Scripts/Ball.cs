@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
-
+  
     public Rigidbody rb; // reference to the Rigidbody component of the ball
     public float startSpeed = 40f; // the speed at which the ball starts moving
 
@@ -115,24 +115,24 @@ public class Ball : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(2);
 
-        ResetGame();
+        NextScene();
     }
 
 
-    private static void ResetGame()
+    private static void NextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void GenerateFeedBack()
     {
         feedBack.text = Point switch
         {
-            0 => "Nothing!",
+            0 => "):",
             > 0 and < 3 => "You are learning Now!",
             >= 3 and < 6 => "It was close!",
             >= 6 and < 10 => "It was nice!",
-            _ => "Perfect! You are a master!"
+            _ => "(:"
         };
 
         feedBack.GetComponent<Animator>().SetTrigger("Show");
